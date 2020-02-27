@@ -73,3 +73,31 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](LICENSE).
+
+
+----
+
+## functions
+### 반영된
+- passport : https://docs.nestjs.com/techniques/authentication
+`@nestjs/passport passport passport-local`
+`@types/passport-local --dev`
+`@nestjs/jwt passport-jwt`
+`@types/passport-jwt --dev`
+- database : https://docs.nestjs.com/techniques/database
+`@nestjs/typeorm typeorm mysql`
+- serialization : https://docs.nestjs.com/techniques/serialization
+- performance : https://docs.nestjs.com/techniques/performance `@nestjs/platform-fastify`
+- password : https://github.com/kelektiv/node.bcrypt.js#readme `bcrypt`
+### 반영중
+
+
+### 반영전
+- config : https://docs.nestjs.com/techniques/configuration `@nestjs/config`
+- logger : https://docs.nestjs.com/techniques/logger 
+- caching : https://docs.nestjs.com/techniques/caching `cache-manager`
+- scheduling : https://docs.nestjs.com/techniques/task-scheduling `@nestjs/schedule`
+- compression : https://docs.nestjs.com/techniques/compression `compression or fastify-compress`
+- queues : https://docs.nestjs.com/techniques/queues `@nestjs/bull bull` `@types/bull --dev`
+- file : https://docs.nestjs.com/techniques/file-upload
+- security : https://docs.nestjs.com/techniques/security `helmet, csurf`
