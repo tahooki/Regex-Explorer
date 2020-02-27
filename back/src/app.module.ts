@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { User } from './users/users.entity';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { AppService } from './app.service';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'nest',
+      database: 'regex-explorer',
       entities: [User],
       synchronize: true,
     }),
