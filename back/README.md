@@ -86,9 +86,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 `@types/passport-jwt --dev`
 - database : https://docs.nestjs.com/techniques/database
 `@nestjs/typeorm typeorm mysql`
+- validator :  https://docs.nestjs.com/pipes#class-validator `class-validator, class-transformer`
 - serialization : https://docs.nestjs.com/techniques/serialization
 - performance : https://docs.nestjs.com/techniques/performance `@nestjs/platform-fastify`
 - password : https://github.com/kelektiv/node.bcrypt.js#readme `bcrypt`
+
 ### 반영중
 
 
@@ -101,3 +103,5 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - queues : https://docs.nestjs.com/techniques/queues `@nestjs/bull bull` `@types/bull --dev`
 - file : https://docs.nestjs.com/techniques/file-upload
 - security : https://docs.nestjs.com/techniques/security `helmet, csurf`
+- guards : https://docs.nestjs.com/guards
+- interceptor : https://docs.nestjs.com/interceptors
