@@ -77,7 +77,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ----
 
-## functions
+## Functions
 ### 반영된
 - passport : https://docs.nestjs.com/techniques/authentication
 `@nestjs/passport passport passport-local`
@@ -90,9 +90,6 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - serialization : https://docs.nestjs.com/techniques/serialization
 - performance : https://docs.nestjs.com/techniques/performance `@nestjs/platform-fastify`
 - password : https://github.com/kelektiv/node.bcrypt.js#readme `bcrypt`
-
-### 반영중
-
 
 ### 반영전
 - config : https://docs.nestjs.com/techniques/configuration `@nestjs/config`

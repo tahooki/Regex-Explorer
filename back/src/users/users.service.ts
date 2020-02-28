@@ -32,9 +32,3 @@ export class UsersService {
     return userEntity.save();
   }
 }
-
-// curl -X POST http://localhost:3000/auth/login -d '{"email": "tahooki12@gmail.com", "password": "good"}' -H "Content-Type: application/json"
-// curl -X POST http://localhost:3000/auth/login -d '{"email": "tahooki33@gmail.com", name: "tahooki33", "password": "good33"}' -H "Content-Type: application/json"
-// curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"
-
-
