@@ -5,6 +5,8 @@ import { User } from './users/users.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { TempModule } from './temp/temp.module';
+import { Temp } from './temp/temp.entity';
 
 @Module({
   imports: [
@@ -15,11 +17,12 @@ import { UsersModule } from './users/users.module';
       username: 'root',
       password: '',
       database: 'regex-explorer',
-      entities: [User],
+      entities: [User, Temp],
       synchronize: true,
     }),
     AuthModule,
-    UsersModule
+    UsersModule,
+    TempModule
   ],
   controllers: [AppController],
   providers: [AppService],

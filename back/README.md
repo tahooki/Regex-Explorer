@@ -91,6 +91,14 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - performance : https://docs.nestjs.com/techniques/performance `@nestjs/platform-fastify`
 - password : https://github.com/kelektiv/node.bcrypt.js#readme `bcrypt`
 
+### 적용 예정
+- CRUD : https://github.com/nestjsx/crud
+```
+npm i @nestjsx/crud class-transformer class-validator
+npm i @nestjsx/crud-request
+npm i @nestjsx/crud-typeorm @nestjs/typeorm typeorm
+```
+
 ### 반영전
 - config : https://docs.nestjs.com/techniques/configuration `@nestjs/config`
 - logger : https://docs.nestjs.com/techniques/logger 
@@ -102,3 +110,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - security : https://docs.nestjs.com/techniques/security `helmet, csurf`
 - guards : https://docs.nestjs.com/guards
 - interceptor : https://docs.nestjs.com/interceptors
+
+----
+## link
+- https://github.com/juliandavidmr/awesome-nestjs

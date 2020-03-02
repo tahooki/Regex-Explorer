@@ -38,7 +38,7 @@ export class AppController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('user')
   async createUser(@Request() req) {
-    return this.userService.createOne(req.body);
+    // return this.userService.createOne(req.body);
   }
 }
 
