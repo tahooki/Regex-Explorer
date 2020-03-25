@@ -1,0 +1,15 @@
+runtime: python27
+
+api_version: 1
+
+threadsafe: true
+
+handlers:
+
+  - url: /
+    static_files: dist/regex-explorer/index.html
+    upload: dist/regex-explorer/index.html
+
+  - url: /(.*)
+    static_files: dist/regex-explorer/\1
+    upload: dist/regex-explorer/(.*)
