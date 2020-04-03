@@ -33,3 +33,10 @@
 <!--제목 유일, 정규식 유일, 테스트 케이스 유일<br/>-->
 
 <!--제목으로 검색하기, 테스트 케이스로 검색하기 ? or 구분없이 동시에 검색하기<br/>-->
+
+
+<ul>
+    <li class="text" *ngFor="let item of items | async">
+        {{item.name}}
+    </li>
+</ul>

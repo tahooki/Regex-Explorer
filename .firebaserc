@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "regex-explorer": {
+      "hosting": {
+        "regex-explorer": [
+          "regex-explorer"
+        ]
+      }
+    }
+  }
+}

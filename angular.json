@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Regex-explorer": {
+    "regex-explorer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Regex-explorer",
+            "outputPath": "dist/regex-explorer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Regex-explorer:build"
+            "browserTarget": "regex-explorer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Regex-explorer:build:production"
+              "browserTarget": "regex-explorer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Regex-explorer:build"
+            "browserTarget": "regex-explorer:build"
           }
         },
         "test": {
@@ -114,11 +114,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Regex-explorer:serve"
+            "devServerTarget": "regex-explorer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Regex-explorer:serve:production"
+              "devServerTarget": "regex-explorer:serve:production"
             }
           }
         },
@@ -129,5 +129,5 @@
       }
     }
   },
-  "defaultProject": "Regex-explorer"
+  "defaultProject": "regex-explorer"
 }
