@@ -3,18 +3,22 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebaseui from 'firebaseui';
 import * as firebase from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from '../../core/service/auth/auth.service';
 
 @Component({
   selector:    'app-login',
-  templateUrl: './login.component.html',
-  styleUrls:   [ './login.component.scss' ]
+  templateUrl: './signin.component.html',
+  styleUrls:   [ './signin.component.scss' ]
 })
-export class LoginComponent implements OnInit {
+export class SigninComponent implements OnInit {
 
   user: any;
 
+  loginUser;
+
   constructor(
     private afAuth: AngularFireAuth,
+    private authService: AuthService,
     private firestore: AngularFirestore
   ) {
   }
@@ -46,7 +50,9 @@ export class LoginComponent implements OnInit {
   }
 
   makeLoginContainer(): void {
-    const ui       = new firebaseui.auth.AuthUI(firebase.auth());
+    // https://github.com/firebase/firebaseui-web/issues/216 new firebaseui.auth.AuthUI(firebase.auth())
+    // Error: An AuthUI instance already exists for the key "[DEFAULT]"
+    const ui       = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
     const uiConfig = this.getUiConfig();
     ui.start('#firebaseui-auth-container', uiConfig);
 
@@ -62,17 +68,18 @@ export class LoginComponent implements OnInit {
 
   logout() {
     this.afAuth.signOut();
+    this.makeLoginContainer();
   }
 
   private getUiConfig(): any {
     const uiConfig = {
       callbacks:        {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-          console.log('authResult', authResult);
-          console.log('authResult', authResult.user);
-          console.log('authResult', authResult.user.uid);
-          console.log('authResult', authResult.user.email);
-          console.log('redirectUrl', redirectUrl);
+          // console.log('authResult', authResult);
+          // console.log('authResult', authResult.user);
+          // console.log('authResult', authResult.user.uid);
+          // console.log('authResult', authResult.user.email);
+          // console.log('redirectUrl', redirectUrl);
           const user = this.firestore.collection('user').doc(authResult.user.uid).get();
           console.log('user', user);
           // 이곳에서 user 도큐먼트에 값을 넣으면 될거같음 !
@@ -82,7 +89,6 @@ export class LoginComponent implements OnInit {
               image: authResult.user.photoURL,
               name:  authResult.user.displayName
             }).then(() => {
-              alert('??????????');
             });
           }
           /*
@@ -139,7 +145,8 @@ phoneNumber: null
           provider:           firebase.auth.EmailAuthProvider.PROVIDER_ID
         },
         firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
       ],
       // Terms of service url.
       tosUrl:           '<your-tos-url>',

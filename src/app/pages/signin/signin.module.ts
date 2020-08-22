@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
+import { SigninRoutingModule } from './signin-routing.module';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../../../environments/environment';
+import { SigninComponent } from './signin.component';
 
 
 @NgModule({
-  declarations: [ LoginComponent ],
+  declarations: [ SigninComponent ],
   imports:      [
     CommonModule,
-    LoginRoutingModule,
+    SigninRoutingModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase)
   ]
 })
-export class LoginModule {
+export class SigninModule {
 }
