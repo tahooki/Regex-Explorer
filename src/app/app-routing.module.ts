@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/regex-test/regex-test.module').then(m => m.RegexTestModule)
   },
   {
+    path:         'regex-create',
+    loadChildren: () => import('./pages/regex-test-create/regex-test-create.module').then(m => m.RegexTestCreateModule)
+  },
+  {
     path:         'user',
     loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
   },
