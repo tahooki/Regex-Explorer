@@ -1,35 +1,39 @@
 import { Injectable } from '@angular/core';
-import { LoginUser } from './auth.model';
+import { User } from './auth.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  loginUser: User;
+  loginUser$ = new BehaviorSubject<User>(null);
 
-  loginUser: LoginUser;
-
-  loginUser$ = new BehaviorSubject<LoginUser>(null);
-
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth
+  ) {
   }
 
-  rxLoginUser(): Observable<LoginUser> {
+  rxLoginUser(): Observable<User> {
     return this.loginUser$;
   }
 
-  getLoginUser(): LoginUser {
+  getLoginUser(): User {
     return this.loginUser;
   }
 
-  login(loginUser: LoginUser): void {
+  signin(loginUser: User): void {
     this.loginUser = loginUser;
   }
 
-  logout(): void {
-    this.loginUser = null;
-    this.loginUser$.next(this.loginUser);
-    this.router.navigateByUrl('signin');
+  signout(): void {
+    this.afAuth.signOut().then(data => {
+      this.loginUser = null;
+      this.loginUser$.next(this.loginUser);
+      this.router.navigateByUrl('signin');
+    });
   }
 }

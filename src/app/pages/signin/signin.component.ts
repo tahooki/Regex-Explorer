@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebaseui from 'firebaseui';
 import * as firebase from 'firebase';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../../core/service/auth/auth.service';
+import { SigninService } from './signin.service';
 
 @Component({
   selector:    'app-login',
@@ -14,28 +14,39 @@ export class SigninComponent implements OnInit {
 
   user: any;
 
-  loginUser;
-
   constructor(
+    private service: SigninService,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
-    private firestore: AngularFirestore
   ) {
   }
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(user => { // 아래꺼랑 동일.
-      console.log('authState', user);
-      this.user = user;
+    const loginUser = this.authService.getLoginUser();
+    if (!loginUser) {
+      this.makeLoginContainer();
+    }
 
-      if (user) {
-        this.firestore.collection('user').doc(user.uid).get().subscribe(data => {
-          console.log('get data ', data.data());
-        });
-      } else {
-        this.makeLoginContainer();
-      }
-    });
+    // this.afAuth.authState.subscribe((user: any) => { // 아래꺼랑 동일.
+    //   console.log('authState', user);
+    //
+    //   if (user) {
+    //     const loginUser: User = {
+    //       uid:      user.uid,
+    //       email:    user.email,
+    //       photoUrl: user.photoURL
+    //     };
+    //
+    //     const doc     = this.firestore.collection('user').doc(user.uid);
+    //     loginUser.doc = doc;
+    //     // user.doc.collection('regexTest').add({
+    //     //   title: '하잇'
+    //     // });
+    //     this.authService.signin(loginUser);
+    //   } else {
+    //     this.makeLoginContainer();
+    //   }
+    // });
 
     // this.afAuth.user.subscribe(user => {
     //   console.log('user', user);
@@ -75,22 +86,19 @@ export class SigninComponent implements OnInit {
     const uiConfig = {
       callbacks:        {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+          const user = this.service.getUser({ authResult });
+          this.authService.signin(user);
+          // 이곳에서 user 도큐먼트에 값을 넣으면 될거같음 !
+          if (!user) {
+            this.service.addUser({ authResult });
+          }
+
           // console.log('authResult', authResult);
           // console.log('authResult', authResult.user);
           // console.log('authResult', authResult.user.uid);
           // console.log('authResult', authResult.user.email);
           // console.log('redirectUrl', redirectUrl);
-          const user = this.firestore.collection('user').doc(authResult.user.uid).get();
-          console.log('user', user);
-          // 이곳에서 user 도큐먼트에 값을 넣으면 될거같음 !
-          if (!user) {
-            this.firestore.collection('user').doc(authResult.user.uid).set({
-              email: authResult.user.email,
-              image: authResult.user.photoURL,
-              name:  authResult.user.displayName
-            }).then(() => {
-            });
-          }
+          // const loginUserDoc = this.firestore.collection('user').doc(authResult.user.uid);
           /*
           *
           uid: "oCsKnXkui8fC6Bl3DV5RCGf54U13"

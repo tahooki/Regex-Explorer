@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from '../../core/service/auth/auth.service';
 
 @Component({
   selector: 'app-regex-test-create',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegexTestCreateComponent implements OnInit {
 
-  constructor() { }
+  formControl: FormControl;
+
+  constructor(
+    private authService: AuthService,
+    private firestore: AngularFirestore
+  ) { }
 
   ngOnInit(): void {
+    this.formControl = new FormControl('', [Validators.required]);
   }
 
+  onCreateRegexTest(): void {
+    if (!this.formControl.valid) {
+      return;
+    }
+  }
 }

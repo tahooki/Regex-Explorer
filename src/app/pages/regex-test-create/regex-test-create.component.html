@@ -1,1 +1,17 @@
 <p>regex-test-create works!</p>
+
+
+<mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [formControl]="formControl" placeholder="제목을 입력해주세요.">
+    <mat-error *ngIf="!formControl.hasError('required')">
+        제목을 입력해주세요
+    </mat-error>
+    <mat-error *ngIf="formControl.hasError('required')">
+        Title is <strong>required</strong>
+    </mat-error>
+</mat-form-field>
+<div>
+    <button mat-raised-button (click)="onCreateRegexTest()">Create</button>
+</div>
+
