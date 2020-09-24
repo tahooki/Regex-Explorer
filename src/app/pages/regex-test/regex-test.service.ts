@@ -12,27 +12,27 @@ export class RegexTestService {
     return null;
   }
 
-  addTestCase(): void {
+  addTestCase(collection, testCase): void {
+    collection.add(testCase);
 
   }
 
   updateTestCase(): void {
-
   }
 
   deleteTestCase(): void {
 
   }
 
-  addRegex(): void {
+  addRegexCase(collection, regexCase): void {
+    collection.add(regexCase);
+  }
+
+  updateRegexCase(): void {
 
   }
 
-  updateRegex(): void {
-
-  }
-
-  deleteRegex(): void {
+  deleteRegexCase(): void {
 
   }
 

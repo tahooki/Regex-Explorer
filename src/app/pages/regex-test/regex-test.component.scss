@@ -1,0 +1,21 @@
+.page-header {
+  height: 80px;
+  .mat-title {
+    margin: 0;
+  }
+}
+
+
+section {
+  &.regex-case {
+    padding: 16px;
+  }
+}
+
+.button-wrapper {
+  text-align: right;
+}
+
+.add-button {
+  margin-left: 16px;
+}

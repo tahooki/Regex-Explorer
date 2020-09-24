@@ -1,12 +1,66 @@
-<p>regex-test works!</p>
+<mat-toolbar class="page-header" color="primary">
+    <span class="mat-title">{{regexTest?.title}}</span>
+</mat-toolbar>
+
+<div class="mat-subheader">Regex list</div>
+
+<section class="regex-case">
+    <mat-list>
+        <ng-template ngFor [ngForOf]="regexCaseList" let-regexCaseitem>
+            <mat-list-item>{{regexCaseitem.regex}}</mat-list-item>
+        </ng-template>
+    </mat-list>
 
 
-<div>title {{regexTest?.title}}</div>
+    <ng-template [ngIf]="isShowRegexAddInput">
+        <mat-form-field class="regex-case-input">
+            <mat-label>Regex Case 추가</mat-label>
+            <input matInput type="text" [formControl]="regexAddControl">
+            <button mat-button *ngIf="regexAddControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="regexAddControl.setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button class="add-button" mat-flat-button color="primary" (click)="onAddRegexCase()">추가하기</button>
+        <button class="add-button" mat-flat-button color="primary" (click)="isShowRegexAddInput = false">닫기</button>
+    </ng-template>
 
-create user
 
-<div>regex list</div>
-<div>case list</div>
+    <div class="button-wrapper">
+        <button mat-flat-button color="primary" (click)="onShowAddRegexInput()">Regex 추가</button>
+    </div>
+</section>
 
-<div>reply list</div>
+<mat-divider></mat-divider>
+
+<section class="regex-case">
+    <div class="mat-subheader">Case list</div>
+
+    <mat-list>
+        <ng-template ngFor [ngForOf]="regexTest.testCaseList" let-testCaseitem>
+            <mat-list-item>{{testCaseitem.test}}</mat-list-item>
+        </ng-template>
+    </mat-list>
+
+    <ng-template [ngIf]="isShowTestCaseAddInput">
+        <mat-form-field class="regex-case-input">
+            <mat-label>Test Case 추가</mat-label>
+            <input matInput type="text" [formControl]="testCaseAddControl">
+            <button mat-button *ngIf="testCaseAddControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="testCaseAddControl.setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button class="add-button" mat-flat-button color="primary" (click)="onAddTestCase()">추가하기</button>
+        <button class="add-button" mat-flat-button color="primary" (click)="isShowTestCaseAddInput = false">닫기</button>
+    </ng-template>
+
+    <div class="button-wrapper">
+        <button mat-flat-button color="primary" (click)="onShowAddTestCaseInput()">Test Case 추가</button>
+    </div>
+</section>
+
+
+<mat-divider></mat-divider>
+
+<div class="mat-subheader">Reply list</div>
+
 

@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../core/service/auth/auth.model';
 import { AuthService } from '../../core/service/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { RegexTest } from './resolver/regex-test.model';
+import { FormControl, Validators } from '@angular/forms';
+import { RegexTestService } from './regex-test.service';
+import * as firebase from 'firebase/app';
+import Timestamp = firebase.firestore.Timestamp;
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-regex-test',
@@ -10,28 +16,101 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegexTestComponent implements OnInit {
   loginUser: User;
-  regexTest: any;
+  regexTest: RegexTest;
+  regexCaseList: any[];
+  testCaseList: any[];
+  isShowRegexAddInput = false;
+  isShowTestCaseAddInput = false;
+
+  regexAddControl = new FormControl('', Validators.required);
+  testCaseAddControl = new FormControl('', Validators.required);
+
 
   constructor(
+    private service: RegexTestService,
     private route: ActivatedRoute,
+    private fireStorage: AngularFirestore,
     private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
     this.loginUser = this.authService.getLoginUser();
     this.regexTest = this.route.snapshot.data?.regexTest;
-    console.log('regexTest', this.regexTest);
-  }
+    this.regexCaseList = this.regexTest.regexCaseList;
+    // this.fireStorage.collection('testCase').valueChanges().subscribe('흠...'); 이걸로 받아야 하나?
 
-  addRegexCase(): void {
-    this.regexTest.doc.collection('regexCase').add({
-      regex: 'ho'
+    this.regexTest.doc.ref.collection('regexCase').orderBy('createdAt').onSnapshot((snapshot) => {
+      const regexCaseList = snapshot.docs.map(doc => {
+        const result = doc.data();
+        result.doc = doc;
+        return result;
+      });
+
+      this.regexCaseList = regexCaseList;
     });
   }
 
-  addTestCase(): void {
-    this.regexTest.doc.collection('testCase').add({
-      test: 'ho'
-    });
+  onAddRegexCase() {
+    if (!this.regexAddControl.valid) {
+      return;
+    }
+
+    const regex = this.regexAddControl.value;
+    const regexCase = {
+      regex,
+      userId: this.loginUser.uid,
+      regexTestId: this.regexTest.uid,
+      updatedAt: Timestamp.now(),
+      createdAt: Timestamp.now()
+    };
+
+    const collection = this.regexTest.doc.ref.collection('regexCase');
+
+    console.log('collection', collection);
+
+    this.service.addRegexCase(collection, regexCase);
+
+    this.isShowRegexAddInput = false;
+  }
+
+  onShowAddRegexInput() {
+    if (!this.loginUser) {
+      console.log('로그인 페이지로 이동');
+      return;
+    }
+
+    this.isShowRegexAddInput = true;
+  }
+
+  onAddTestCase() {
+    if (!this.testCaseAddControl.valid) {
+      return;
+    }
+
+    const test = this.testCaseAddControl.value;
+    const testCase = {
+      test,
+      userId: this.loginUser.uid,
+      regexTestId: this.regexTest.uid,
+      updatedAt: Timestamp.now(),
+      createdAt: Timestamp.now()
+    };
+
+    const collection = this.regexTest.doc.ref.collection('testCase');
+
+    console.log('collection', collection);
+
+    this.service.addTestCase(collection, testCase);
+
+    this.isShowTestCaseAddInput = false;
+  }
+
+  onShowAddTestCaseInput() {
+    if (!this.loginUser) {
+      console.log('로그인 페이지로 이동');
+      return;
+    }
+
+    this.isShowTestCaseAddInput = true;
   }
 }

@@ -3,7 +3,9 @@
 
 <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput [formControl]="formControl" placeholder="제목을 입력해주세요.">
+    <label>
+        <input matInput [formControl]="formControl" placeholder="제목을 입력해주세요.">
+    </label>
     <mat-error *ngIf="!formControl.hasError('required')">
         제목을 입력해주세요
     </mat-error>

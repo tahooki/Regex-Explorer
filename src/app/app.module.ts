@@ -9,21 +9,28 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
-  imports: [
+  imports:      [
     LayoutModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers:    [
+    {
+      provide:  COMPOSITION_BUFFER_MODE,
+      useValue: false
+    }
+  ],
+  bootstrap:    [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}
