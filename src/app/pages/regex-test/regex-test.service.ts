@@ -32,8 +32,8 @@ export class RegexTestService {
 
   }
 
-  deleteRegexCase(): void {
-
+  deleteRegexCase(collection, regexId): void {
+    collection.doc(regexId).delete();
   }
 
 }

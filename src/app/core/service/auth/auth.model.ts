@@ -3,6 +3,7 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore/document/docum
 export interface User {
   uid: string;
   email: string;
-  photoUrl: string;
+  name: string;
+  image: string;
   doc?: AngularFirestoreDocument;
 }

@@ -13,14 +13,14 @@ export class SigninService {
   }
 
   getUser(authResult): any {
-    const firebaseUser: any = this.firestore.collection('user').doc(authResult.user.uid).get();
-
-    const doc = this.firestore.collection('user').doc(firebaseUser.uid);
+    const doc = this.firestore.collection('user').doc(authResult.user.uid);
+    const firebaseUser: any = doc.get();
 
     const user: User = {
-      uid:      firebaseUser.uid,
-      email:    firebaseUser.email,
-      photoUrl: firebaseUser.photoURL
+      uid:   doc.ref.id,
+      email: firebaseUser.email,
+      name:  firebaseUser.name,
+      image: firebaseUser.image
     };
 
     user.doc = doc;

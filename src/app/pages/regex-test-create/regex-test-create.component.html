@@ -2,18 +2,18 @@
 
 
 <mat-form-field>
-    <mat-label>Title</mat-label>
-    <label>
-        <input matInput [formControl]="formControl" placeholder="제목을 입력해주세요.">
-    </label>
-    <mat-error *ngIf="!formControl.hasError('required')">
-        제목을 입력해주세요
-    </mat-error>
-    <mat-error *ngIf="formControl.hasError('required')">
-        Title is <strong>required</strong>
-    </mat-error>
+  <mat-label>Title</mat-label>
+  <label>
+    <input matInput [formControl]="formControl" placeholder="제목을 입력해주세요.">
+  </label>
+  <mat-error *ngIf="!formControl.hasError('required')">
+    제목을 입력해주세요
+  </mat-error>
+  <mat-error *ngIf="formControl.hasError('required')">
+    Title is <strong>required</strong>
+  </mat-error>
 </mat-form-field>
 <div>
-    <button mat-raised-button (click)="onCreateRegexTest()">Create</button>
+  <button mat-raised-button (click)="onCreateRegexTest()">Create</button>
 </div>
 

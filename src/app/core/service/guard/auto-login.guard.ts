@@ -50,16 +50,21 @@ export class AutoLoginGuard implements CanActivate {
 
   private async isFirebaseAuthLogin(): Promise<boolean> {
     return new Promise((resolve) => {
-      this.afAuth.authState.subscribe((user) => {
+      this.afAuth.authState.subscribe(async (auth) => {
 
-        if (user) {
+        if (auth) {
+          const doc             = this.fireStore.collection('user').doc(auth.uid);
+          const instance        = await doc.get().toPromise();
+          const user            = instance.data();
+          console.log('doc', doc);
+          console.log('user', user);
           const loginUser: User = {
-            uid: user.uid,
-            email: user.email,
-            photoUrl: user.photoURL
+            uid:      doc.ref.id,
+            name:     user.name,
+            email:    user.email,
+            image: user.image
           };
 
-          const doc = this.fireStore.collection('user').doc(user.uid);
           loginUser.doc = doc;
 
           this.authService.signin(loginUser);
@@ -67,6 +72,7 @@ export class AutoLoginGuard implements CanActivate {
         } else {
           resolve(false);
         }
+
       });
     });
   }

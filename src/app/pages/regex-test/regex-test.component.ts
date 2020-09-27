@@ -35,6 +35,7 @@ export class RegexTestComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginUser = this.authService.getLoginUser();
+    console.log('this.loginUser', this.loginUser);
     this.regexTest = this.route.snapshot.data?.regexTest;
     this.regexCaseList = this.regexTest.regexCaseList;
     // this.fireStorage.collection('testCase').valueChanges().subscribe('흠...'); 이걸로 받아야 하나?
@@ -43,8 +44,11 @@ export class RegexTestComponent implements OnInit {
       const regexCaseList = snapshot.docs.map(doc => {
         const result = doc.data();
         result.doc = doc;
+
         return result;
       });
+
+      console.log('regexCaseList', regexCaseList);
 
       this.regexCaseList = regexCaseList;
     });
@@ -59,6 +63,8 @@ export class RegexTestComponent implements OnInit {
     const regexCase = {
       regex,
       userId: this.loginUser.uid,
+      userName: this.loginUser.name,
+      userImage: this.loginUser.image,
       regexTestId: this.regexTest.uid,
       updatedAt: Timestamp.now(),
       createdAt: Timestamp.now()
@@ -112,5 +118,16 @@ export class RegexTestComponent implements OnInit {
     }
 
     this.isShowTestCaseAddInput = true;
+  }
+
+  onDeleteRegex(regexItem) {
+    console.log('regexItem', regexItem);
+    if (confirm('삭제하시겠습니까?')) {
+      regexItem.doc.ref.delete();
+
+    }
+    // const collection = this.regexTest.doc.ref.collection('regexCase');
+    //
+    // this.service.deleteRegexCase(collection, regexId);
   }
 }
